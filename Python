@@ -1,0 +1,110 @@
+import turtle
+
+def create_turtle():
+    tim = turtle.Turtle()
+    tim.speed(0)  # Fastest speed
+    tim.hideturtle()  # Hide the turtle for faster drawing
+    return tim
+
+def draw_petal(t, length=200, color=(0, 0, 0)):
+    t.color(color)
+    t.begin_fill()
+    for _ in range(9):
+        t.forward(length)
+        t.circle(length/4, 208)
+        t.forward(length)
+        t.right(180)
+        t.right(-17)
+    t.end_fill()
+
+def draw_circle(t, radius=100, color=(0, 0, 0)):
+    t.penup()
+    t.right(-90)
+    t.backward(radius)
+    t.pendown()
+    t.right(90)
+    t.color(color)
+    t.begin_fill()
+    t.circle(radius)
+    t.end_fill()
+    t.penup()
+    t.right(-90)
+    t.forward(radius)
+    t.pendown()
+    t.right(90)
+
+def draw_square(t, size=50, color=(0, 0, 0)):
+    t.color(color)
+    t.begin_fill()
+    for _ in range(4):
+        t.forward(size)
+        t.right(90)
+    t.end_fill()
+
+def draw_square_design(t, size=20, color=(0, 0, 0), delta=20):
+    t.color(color)
+    for _ in range(360 // delta):
+        draw_square(t, size * 0.707, color)
+        t.right(delta)
+
+def draw_pookkalam(t):
+    print("Starting to draw pookkalam...")
+    
+    # Outer circles
+    draw_circle(t, 300, (17, 110, 0))  # green
+    draw_circle(t, 280, (251, 255, 41))  # yellow
+
+    # Inner crimson circles
+    t.right(90)
+    t.forward(201)
+    t.right(-90)
+    t.right(22.5)
+    for _ in range(8):
+        draw_circle(t, 78.95, (227, 38, 54))  # crimson
+        t.right(-45)
+        t.forward(154)
+
+    t.right(67.5)
+    t.backward(201)
+
+    # Central design
+    t.pensize(5)
+    draw_circle(t, 225, (255, 255, 230))  # cream
+    draw_circle(t, 206, (17, 110, 0))  # green
+
+    t.right(-90)
+    t.right(11.25)
+    draw_petal(t, 160, (255, 166, 0))  # orange
+    draw_petal(t, 140, (251, 255, 41))  # yellow
+    draw_petal(t, 110, (255, 255, 230))  # jasmine
+
+    # Central circles
+    draw_circle(t, 75, (17, 110, 0))  # green
+    draw_circle(t, 60, (255, 255, 230))  # jasmine
+    draw_circle(t, 45, (166, 77, 255))  # violet
+    draw_circle(t, 20, (251, 255, 41))  # yellow
+
+    print("Finished drawing pookkalam.")
+
+def main():
+    print("Starting the program...")
+    print("Happy Onam!")
+    
+    # Set up the screen
+    screen = turtle.Screen()
+    screen.setup(800, 800)  # Set a larger window size
+    screen.title("Onam Pookkalam")
+    screen.colormode(255)  # Allow RGB color values
+    
+    # Create and set up the turtle
+    tim = create_turtle()
+    
+    # Draw the pookkalam
+    draw_pookkalam(tim)
+    
+    print("Drawing complete. Click on the turtle graphics window to close it.")
+    screen.exitonclick()  # Keep the window open until clicked
+
+if __name__ == "__main__":
+    main()
+    print("Program finished.")
